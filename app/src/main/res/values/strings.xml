@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyWeatherApp</string>
+    <string name="city_name_text">City Name</string>
+    <string name="temperature_parametr">Temperature</string>
+    <string name="speed">Speed</string>
+    <string name="pressure">Pressure</string>
+</resources>

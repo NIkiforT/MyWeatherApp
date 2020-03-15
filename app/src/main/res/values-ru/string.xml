@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Погода</string>
-    <string name="city_name_text">Название города</string>
-    <string name="temperature_parametr">Температура</string>
-    <string name="speed">Скорость ветра</string>
-    <string name="pressure">Давление</string>
-</resources>

@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/main_background" />
+        app:srcCompat="@drawable/setting_background" />
 
     <Button
         android:id="@+id/button_back"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/textCity"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -63,7 +63,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/popular_city"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/textCity" />
 
     <TextView
         android:id="@+id/textViewMoscow"

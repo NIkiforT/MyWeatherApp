@@ -4,18 +4,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class Setting extends AppCompatActivity {
+public class Setting extends AppCompatActivity implements Constants {
     private static final String TAG = "SettingActivity";
     private static final String KEY_CITY_TEXT = "key City";
     private static final String KEY_SPEED = "key speed";
@@ -25,22 +24,38 @@ public class Setting extends AppCompatActivity {
     EditText textCity;
     CheckBox checkSpeed;
     CheckBox checkPressure;
-
+    TextView buttonMoscow;
+    TextView buttonSaintPetersburg;
+    TextView buttonSochi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_city);
 
-
         initButtonBack();
         initTextCity();
         initCheckPressure();
         initCheckSpeed();
+        initMoscow();
+        initSaintPeterburg();
+        initSochi();
 
         openingMain();
         checkSpeed();
         checkPressure();
+        enterMoscow();
+        enterSaintPetegburg();
+        enterSochi();
+
+        //Получение из MainActivity название текущего города
+        nameCityFromMain();
+
+    }
+
+    //функция записывает в EditText название текущего города от MainActivity
+    private void nameCityFromMain() {
+        textCity.setText(getIntent().getExtras().getString(NAME_CITY_FOR_SETTING));
     }
 
     //Инициализация переменных
@@ -50,19 +65,31 @@ public class Setting extends AppCompatActivity {
     private void initTextCity(){
         textCity = findViewById(R.id.textCity);
     }
+    //В check box isChecked - true
     private void initCheckSpeed(){
         checkSpeed = findViewById(R.id.checkBoxSpeed);
+        checkSpeed.setChecked(true);
+
     }
     private void initCheckPressure(){
         checkPressure = findViewById(R.id.checkBoxPressure);
+        checkPressure.setChecked(true);
     }
+    private void initMoscow(){buttonMoscow = findViewById(R.id.textViewMoscow);}
+    private void initSaintPeterburg(){buttonSaintPetersburg = findViewById(R.id.textViewSaintPetersburg);}
+    private void initSochi(){buttonSochi = findViewById(R.id.textViewSochi);}
 
-    //возвращение на главный экран
+    //возвращение на главный экран, передача данных: Город, скорость ветра, температура.
     private void openingMain() {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intentResult = new Intent();
+                intentResult.putExtra(NAME_CITY, textCity.getText().toString());
+                intentResult.putExtra(SPEED_VISIBLE, checkSpeed.isChecked());
+                intentResult.putExtra(PRESSURE_VISIBLE, checkPressure.isChecked());
+                setResult(RESULT_OK, intentResult);
+                finish();
             }
         });
     }
@@ -88,6 +115,33 @@ public class Setting extends AppCompatActivity {
         });
     }
 
+    //Ввод поппулярных городов в EditText (textCity) - начало
+    private void enterMoscow(){
+        buttonMoscow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textCity.setText(R.string.moscow);
+            }
+        });
+    }
+    private void enterSaintPetegburg(){
+        buttonSaintPetersburg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textCity.setText(R.string.saint_petersburg);
+            }
+        });
+    }
+    private void enterSochi(){
+        buttonSochi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textCity.setText(R.string.sochi);
+            }
+        });
+    }
+    //Ввод поппулярных городов в EditText (textCity) - конец
+
 
     //Сохранение состояния Activity
     @Override
@@ -97,8 +151,8 @@ public class Setting extends AppCompatActivity {
         Log.d(TAG, " onSaveInstanceState");
 
         outState.putString(KEY_CITY_TEXT, ((EditText)findViewById(R.id.textCity)).getText().toString());
-        outState.putBoolean(KEY_SPEED, checkSpeed.isPressed());
-        outState.putBoolean(KEY_PRESSURE, checkPressure.isPressed());
+        outState.putBoolean(KEY_SPEED, checkSpeed.isChecked());
+        outState.putBoolean(KEY_PRESSURE, checkPressure.isChecked());
     }
 
     //Восстановление Activity
@@ -109,7 +163,7 @@ public class Setting extends AppCompatActivity {
         Log.d(TAG, " onRestoreInstanceState");
 
         textCity.setText(savedInstanceState.getString(KEY_CITY_TEXT));
-        checkSpeed.setPressed(savedInstanceState.getBoolean(KEY_SPEED));
-        checkPressure.setPressed(savedInstanceState.getBoolean(KEY_PRESSURE));
+        checkSpeed.setChecked(savedInstanceState.getBoolean(KEY_SPEED));
+        checkPressure.setChecked(savedInstanceState.getBoolean(KEY_PRESSURE));
     }
 }

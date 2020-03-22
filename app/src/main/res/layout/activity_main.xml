@@ -27,10 +27,23 @@
         android:layout_marginEnd="15dp"
         android:text="@string/setting"
         android:textAllCaps="true"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:background="@drawable/button_stroke_black95_press_white"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/button_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:text="@string/about_city"
+        android:textAllCaps="true"
+        android:textSize="15sp"
+        android:background="@drawable/button_stroke_black95_press_white"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -38,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="@string/city_name_text"
+        android:text="@string/moscow"
         android:textColor="@color/colorText"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="@+id/back_ground"

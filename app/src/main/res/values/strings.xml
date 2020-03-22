@@ -13,4 +13,6 @@
     <string name="sochi">Sochi</string>
     <string name="setting">Setting</string>
     <string name="back">Back</string>
+    <string name="about_city">About City</string>
+    <string name="wiki_url">https://ru.wikipedia.org/wiki/</string>
 </resources>
